@@ -24,6 +24,56 @@ void fractalTree(Turtle *t, float length, int depth){
   turtleBackward(t, length);
 }
 
+void fractalTree2(Turtle *t, float length, int depth){
+  if (depth==0 || length<5)
+    return;
+  if (length==100){
+    turtleLeft(t,90);
+  } 
+  turtleForward(t, length);
+
+  turtleLeft(t,30);
+  fractalTree2(t, length/2, depth-1);
+
+  turtleRight(t,60);
+  fractalTree2(t, length/2, depth-1);
+
+  turtleLeft(t,30);
+  turtleBackward(t,length);
+}
+
+void fractalTree3(Turtle *t, float length, int depth){
+  if (depth==0 || length<5)
+    return;
+  turtleForward(t, length);
+   
+  turtleLeft(t, 60);
+  fractalTree3(t, length*0.7, depth-1);
+
+  turtleRight(t, 120);
+  fractalTree3(t, length*0.7, depth-1);
+
+  turtleLeft(t, 60);
+  fractalTree3(t, length*0.7, depth-1);
+  turtleBackward(t, length);
+}
+
+void levy(Turtle *t, float length, float depth){
+  if (depth==0){
+    turtleForward(t, length);
+    return; 
+  }
+
+  turtleLeft(t, 45);
+  levy(t, length/sqrt(2), depth-1);
+  
+  turtleRight(t, 90);
+  levy(t, length/sqrt(2), depth-1);
+
+  turtleLeft(t, 45);
+}
+
+
 
 int main(){
   TurtleApp *app = turtleAppCreate(600, 600, "arboles");
@@ -41,6 +91,10 @@ int main(){
     turtleSetSpeed(t, 2);
  
     fractalTree(t, 100,6);
+    //fractalTree2(t, 100, 4);
+    //triangulo(t, 100, 2);
+    //levy(t, 200, 1);
+    //fractalTree3(t, 100, 4);
 
 
 
@@ -49,4 +103,4 @@ int main(){
     turtleAppDestroy(app);
 
     return 0;
-} 
+}   
