@@ -4,6 +4,10 @@
 void fractalTree(Turtle *t, float length, int depth){
   if(depth==0 || length<10)
     return;
+  if (depth>5)
+    turtleSetColor(t,120,70,20);
+  else
+    turtleSetColor(t,0,200,0);
   turtleForward(t, length);
   
   turtleLeft(t, 20);
@@ -13,8 +17,13 @@ void fractalTree(Turtle *t, float length, int depth){
   fractalTree(t, length*0.6, depth-1);
 
   turtleLeft(t, 20);
+  if (depth>5)
+    turtleSetColor(t,120,70,20);
+  else
+    turtleSetColor(t,0,200,0);
   turtleBackward(t, length);
 }
+
 
 int main(){
   TurtleApp *app = turtleAppCreate(600, 600, "arboles");
